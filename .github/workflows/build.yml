@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Show files
+        run: ls -la
+      
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -32,6 +35,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Show files
+        run: dir
       
       - name: Setup Python
         uses: actions/setup-python@v5
