@@ -11,9 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Show files
-        run: ls -la
-      
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -22,22 +19,24 @@ jobs:
       - name: Install dependencies
         run: pip3 install g4f colorama pyinstaller
           
-      - name: Build macOS app
-        run: pyinstaller --onefile --console --name "SolverAI-Mac" SolverAI.py
+      - name: Build macOS .app
+        run: pyinstaller --onedir --windowed --name "SolverAI" SolverAI.py
           
-      - name: Upload artifact
+      - name: Zip the .app
+        run: |
+          cd dist
+          zip -r SolverAI-Mac.zip SolverAI.app
+          
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: SolverAI-Mac
-          path: dist/SolverAI-Mac
+          path: dist/SolverAI-Mac.zip
 
   build-windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Show files
-        run: dir
       
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -47,10 +46,10 @@ jobs:
       - name: Install dependencies
         run: pip install g4f colorama pyinstaller
           
-      - name: Build Windows exe
+      - name: Build Windows .exe
         run: pyinstaller --onefile --console --name "SolverAI-Windows" SolverAI.py
           
-      - name: Upload artifact
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: SolverAI-Windows
