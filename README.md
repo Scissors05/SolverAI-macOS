@@ -1,0 +1,1 @@
+# SolverAI-macOS
