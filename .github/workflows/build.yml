@@ -1,4 +1,4 @@
-name: Build SolverAI
+name: Build SolverAI for macOS
 
 on:
   push:
@@ -32,25 +32,3 @@ jobs:
         with:
           name: SolverAI-Mac
           path: dist/SolverAI-Mac.zip
-
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          
-      - name: Install dependencies
-        run: pip install g4f colorama pyinstaller
-          
-      - name: Build Windows .exe
-        run: pyinstaller --onefile --console --name "SolverAI-Windows" SolverAI.py
-          
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: SolverAI-Windows
-          path: dist/SolverAI-Windows.exe
